@@ -62,7 +62,7 @@ app.put("/emp-update", (req, res) => {
     console.log(req.body);
     // console.log(req.body.phone_number);
 
-    if(req.body.phone_number != null){
+    if(phone_number != null && employee_id != null){
       db.query("UPDATE employees SET phone_number = ? WHERE employee_id = ?", [phone_number,employee_id], (err,result) =>{
         if(err){
             console.log(err);
@@ -73,7 +73,7 @@ app.put("/emp-update", (req, res) => {
     });
     }
 
-    if(req.body.first_name != null){
+    if(req.body.first_name != null && employee_id != null){
       db.query("UPDATE employees SET first_name = ? WHERE employee_id = ?", [first_name,employee_id], (err,result) => {
         if(err){
           console.log(err);
@@ -84,7 +84,7 @@ app.put("/emp-update", (req, res) => {
       })
     }
 
-    if(req.body.last_name != null){
+    if(req.body.last_name != null && employee_id != null){
       db.query("UPDATE employees SET last_name = ? WHERE employee_id = ?", [last_name,employee_id], (err,result) => {
         if(err){
           console.log(err);
@@ -95,7 +95,61 @@ app.put("/emp-update", (req, res) => {
       })
     }
 
-    if(req.body.email != null){
+    if(req.body.email != null && employee_id != null){
+      db.query("UPDATE employees SET email = ? WHERE employee_id = ?", [email,employee_id], (err,result) => {
+        if(err){
+          console.log(err);
+        } else {
+          res.send();
+          console.log('update email complete')
+        }
+      })
+    }
+
+})
+app.put("/emp-update/:employee_id", (req, res) => {
+    const employee_id = req.body.employee_id;
+    const phone_number = req.body.phone_number;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const email = req.body.email;
+    console.log(req.body);
+    // console.log(req.body.phone_number);
+
+    if(phone_number != null && employee_id != null){
+      db.query("UPDATE employees SET phone_number = ? WHERE employee_id = ?", [phone_number,employee_id], (err,result) =>{
+        if(err){
+            console.log(err);
+        } else {
+            res.send();
+            console.log('update phone_number complete');
+        }
+    });
+    }
+
+    if(req.body.first_name != null && employee_id != null){
+      db.query("UPDATE employees SET first_name = ? WHERE employee_id = ?", [first_name,employee_id], (err,result) => {
+        if(err){
+          console.log(err);
+        } else {
+          res.send();
+          console.log('update first_name complete')
+        }
+      })
+    }
+
+    if(req.body.last_name != null && employee_id != null){
+      db.query("UPDATE employees SET last_name = ? WHERE employee_id = ?", [last_name,employee_id], (err,result) => {
+        if(err){
+          console.log(err);
+        } else {
+          res.send();
+          console.log('update last_name complete')
+        }
+      })
+    }
+
+    if(req.body.email != null && employee_id != null){
       db.query("UPDATE employees SET email = ? WHERE employee_id = ?", [email,employee_id], (err,result) => {
         if(err){
           console.log(err);
@@ -120,6 +174,6 @@ app.delete("/emp-delete/:employee_id", (req, res) => {
     });
 })
 
-app.listen(3001, () => {
-  console.log("listen on port 3001");
+app.listen(3002, () => {
+  console.log("listen on port 3002");
 });
