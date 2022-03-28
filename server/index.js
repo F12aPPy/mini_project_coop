@@ -33,6 +33,7 @@ app.post("/create-emp", body('email').isEmail() , (req, res) => {
   const email = req.body.email;
   const phone_number = req.body.phone_number;
   const gender = req.body.gender;
+  const images = req.body.images;
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -40,8 +41,8 @@ app.post("/create-emp", body('email').isEmail() , (req, res) => {
   }
 
   db.query(
-    "INSERT INTO employees (first_name, last_name, cardnumber_id, email, phone_number, gender) VALUE(?,?,?,?,?,?)",
-    [first_name, last_name, cardnumber_id, email, phone_number, gender],
+    "INSERT INTO employees (first_name, last_name, cardnumber_id, email, phone_number, gender, images) VALUE(?,?,?,?,?,?,?)",
+    [first_name, last_name, cardnumber_id, email, phone_number, gender, images],
     (err, result) => {
         if(err){
             console.log(err);
