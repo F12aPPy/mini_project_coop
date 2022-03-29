@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in HTML.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3002
+    description: test from http://localhost:3002
+paths:
+  /getemployee:
+    get:
+      tags:
+      - "employee"
+      summary: All Employee. 
+      description: All Employee.
+      responses:
+        '200':    # status code
+          description: List of Employee
+          content:
+            application/json:
+              schema: 
+                type: array
+  /create-emp:
+    post:
+      tags:
+      - "employee"
+      summary: Creates a employee.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                cardnumber_id:
+                  type: string
+                email:
+                  type: string
+                phone_number:
+                  type: string
+                gender: 
+                  type: string
+                images:
+                  type: stirng
+      responses: 
+        '201':
+          description: Created
+  /emp-update/{employee_id}:
+    put:
+      tags:
+      - "employee"
+      summary: "Updated Employee"
+      operationId: "updateEmployee"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "employee_id"
+        in: "path"
+        description: "employee that need to be updated"
+        required: true
+        type: "int"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                phone_number:
+                  type: string
+      responses:
+        "400":
+          description: "Invalid user supplied"
+        "404":
+          description: "User not found"
+  /emp-delete/{employee_id}:
+    delete:
+      tags:
+      - "employee"
+      summary: "Delete employee"
+      description: ""
+      operationId: "deleteEmployee"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "employee_id"
+        in: "path"
+        description: "The empp_id that needs to be deleted"
+        required: true
+        type: "int"
+      responses:
+        "400":
+          description: "Invalid username supplied"
+        "404":
+          description: "User not found"

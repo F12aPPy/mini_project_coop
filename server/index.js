@@ -3,9 +3,13 @@ const app = express();
 var mysql = require("mysql");
 const cors = require("cors");
 const {body, validationResult } = require('express-validator');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 app.use(cors());
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const db = mysql.createConnection({
   user: "root",
@@ -123,7 +127,7 @@ app.put("/emp-update/:employee_id", (req, res) => {
             console.log(err);
         } else {
             res.send();
-            console.log('update phone_number complete');
+            console.log('update phone_number complete by id');
         }
     });
     }
@@ -134,7 +138,7 @@ app.put("/emp-update/:employee_id", (req, res) => {
           console.log(err);
         } else {
           res.send();
-          console.log('update first_name complete')
+          console.log('update first_name complete by id')
         }
       })
     }
@@ -145,7 +149,7 @@ app.put("/emp-update/:employee_id", (req, res) => {
           console.log(err);
         } else {
           res.send();
-          console.log('update last_name complete')
+          console.log('update last_name complete by id')
         }
       })
     }
@@ -156,7 +160,7 @@ app.put("/emp-update/:employee_id", (req, res) => {
           console.log(err);
         } else {
           res.send();
-          console.log('update email complete')
+          console.log('update email complete by id')
         }
       })
     }
